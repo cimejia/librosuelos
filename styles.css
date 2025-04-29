@@ -1,119 +1,63 @@
-        body {
-            font-family: "Inter", sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow: hidden; /* Prevent scrollbars */
-        }
+.navigation-bar {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+}
 
-        .book-container {
-            perspective: 1500px; /* 3D perspective */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 90%; /* Responsive width */
-            max-width: 800px; /* Max width for larger screens */
-            height: auto;
-            transition: transform 0.3s ease; /* Smooth zoom transition */
-        }
+.navigation-bar button,
+.navigation-bar input[type="number"],
+.navigation-bar span {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
 
-        .book {
-            width: 100%;
-            height: auto; /* Adjust height based on content */
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 1s; /* Animation for flipping */
-        }
+.navigation-bar button:hover {
+    background-color: #e0e0e0;
+}
 
-        .page {
-            position: absolute;
-            width: 50%; /* Each page is half the book width */
-            height: 100%;
-            transform-origin: left;
-            transition: transform 1s; /* Animation for flipping */
-            backface-visibility: hidden; /* Hide the back of the page during flip */
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-            background-color: white; /* Default background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden; /* Hide content overflow */
-        }
+.navigation-bar input[type="number"] {
+    width: 60px;
+    text-align: center;
+}
 
-        .page img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Cover the page area */
-        }
+.navigation-bar input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
 
-        /* Positioning pages */
-        .page:nth-child(odd) {
-            right: 0;
-            border-radius: 0 10px 10px 0;
-        }
+.navigation-bar span {
+    user-select: none;
+    color: #333;
+}
 
-        .page:nth-child(even) {
-            left: 0;
-            border-radius: 10px 0 0 10px;
-        }
+/* Estilo especial para botones importantes */
+.navigation-bar button#fullscreen-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+.navigation-bar button#fullscreen-btn:hover {
+    background-color: #0056b3;
+}
 
-        /* Initial state for pages */
-        .page:not(.flipped) {
-             transform: rotateY(0deg);
-             z-index: 1; /* Ensure non-flipped pages are layered correctly */
-        }
-
-
-        /* Flipped state for pages */
-        .page.flipped {
-            transform: rotateY(-180deg);
-            z-index: 2; /* Ensure flipped pages are on top during animation */
-        }
-
-         /* Controls */
-        .controls {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px; /* Space between sections in the control bar */
-            z-index: 10; /* Ensure controls are above the book */
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-            padding: 10px 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            align-items: center; /* Vertically align items */
-        }
-
-        .icon-bar {
-            display: flex;
-            align-items: center;
-            gap: 15px; /* Space between icons */
-        }
-
-        .icon-bar i {
-            font-size: 1.5rem; /* Icon size */
-            color: #333; /* Default icon color */
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .icon-bar i:hover {
-            color: #3b82f6; /* Tailwind blue-500 on hover */
-        }
-
-        .icon-bar i.disabled {
-            color: #ccc; /* Disabled icon color */
-            cursor: not-allowed;
-        }
-
-        .page-number {
-            font-size: 1rem;
-            color: #333;
-            min-width: 80px; /* Ensure enough space for page number text */
-            text-align: center;
-        }
+.navigation-bar button#go-to-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+.navigation-bar button#go-to-button:hover {
+    background-color: #1e7e34;
+}
