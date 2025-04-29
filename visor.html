@@ -2,69 +2,35 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Libro Interactivo</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="turn.js"></script>
-    <!--		
-    <style>
-        #flipbook { width: 1000px; height: 800px; }
-    </style>
-    -->	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Ebook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="flipbook">	
-	<div class="hard"></div>
-	<div class="hard"></div>
-	
-	<div><img src="pg-001.jpg" width="500" height="800"></div>
-    	<div><img src="pg-002.jpg" width="500" height="800"></div>
-    	<div><img src="pg-003.jpg" width="500" height="800"></div>
-	<div><img src="pg-004.jpg" width="500" height="800"></div>
-    	<div><img src="pg-005.jpg" width="500" height="800"></div>
-    	<div><img src="pg-006.jpg" width="500" height="800"></div>
-	<div><img src="pg-007.jpg" width="500" height="800"></div>
-    	<div><img src="pg-008.jpg" width="500" height="800"></div>
-    	<div><img src="pg-009.jpg" width="500" height="800"></div>
-	<div><img src="pg-010.jpg" width="500" height="800"></div>
-    	<div><img src="pg-011.jpg" width="500" height="800"></div>
-    	<div><img src="pg-012.jpg" width="500" height="800"></div>
-	<div><img src="pg-013.jpg" width="500" height="800"></div>
-    	<div><img src="pg-014.jpg" width="500" height="800"></div>
-    	<div><img src="pg-015.jpg" width="500" height="800"></div>
-	<div><img src="pg-016.jpg" width="500" height="800"></div>
-    	<div><img src="pg-017.jpg" width="500" height="800"></div>
-    	<div><img src="pg-018.jpg" width="500" height="800"></div>
-	<div><img src="pg-019.jpg" width="500" height="800"></div>
-    	<div><img src="pg-020.jpg" width="500" height="800"></div>
-    	<div><img src="pg-021.jpg" width="500" height="800"></div>
-	<div><img src="pg-022.jpg" width="500" height="800"></div>
-    	<div><img src="pg-023.jpg" width="500" height="800"></div>
-    	<div><img src="pg-024.jpg" width="500" height="800"></div>
-	<div><img src="pg-025.jpg" width="500" height="800"></div>
-    	<div><img src="pg-026.jpg" width="500" height="800"></div>
-    	<div><img src="pg-027.jpg" width="500" height="800"></div>
-	<div><img src="pg-028.jpg" width="500" height="800"></div>
-    	<div><img src="pg-029.jpg" width="500" height="800"></div>
-    	<div><img src="pg-030.jpg" width="500" height="800"></div>
-	<div><img src="pg-031.jpg" width="500" height="800"></div>
-    	<div><img src="pg-032.jpg" width="500" height="800"></div>
-    	<div><img src="pg-033.jpg" width="500" height="800"></div>
-	<div><img src="pg-034.jpg" width="500" height="800"></div>
-    	<div><img src="pg-035.jpg" width="500" height="800"></div>
-    	<div><img src="pg-036.jpg" width="500" height="800"></div>
-	<div><img src="pg-037.jpg" width="500" height="800"></div>
-    	<div><img src="pg-038.jpg" width="500" height="800"></div>
-    	<div><img src="pg-039.jpg" width="500" height="800"></div>
-	<div><img src="pg-040.jpg" width="500" height="800"></div>
+    <div class="book-container" id="bookContainer">
+        <div class="book" id="ebook">
+            </div>
+    </div>
 
-	<div class="hard"></div>
-	<div class="hard">"Final"</div>
-</div>
-<script type="text/javascript">
-	$("#flipbook").turn({
-		width: 1000,
-		height: 800,
-		autoCenter: true
-	});
-</script></body>
+    <div class="controls">
+        <div class="icon-bar">
+            <i class="fas fa-angle-double-left" id="firstPageIcon"></i>
+            <i class="fas fa-chevron-left" id="prevIcon"></i>
+        </div>
+
+        <div class="page-number" id="pageNumber"></div>
+
+        <div class="icon-bar">
+            <i class="fas fa-chevron-right" id="nextIcon"></i>
+            <i class="fas fa-angle-double-right" id="lastPageIcon"></i>
+        </div>
+
+        <div class="icon-bar">
+             <i class="fas fa-search-minus" id="zoomOutIcon"></i>
+            <i class="fas fa-search-plus" id="zoomInIcon"></i>
+        </div>
+    </div>	
+</body>
 </html>
