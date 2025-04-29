@@ -12,12 +12,12 @@
         // IMPORTANT: Replace these with the URLs of your PDF page images
         // Ensure you have an image for each page of your PDF.
         const pageImages = [
-            'https://placehold.co/400x600/E0E0E0/333?text=Page+1', // Replace with URL for page 1
-            'https://placehold.co/400x600/D0D0D0/333?text=Page+2', // Replace with URL for page 2
-            'https://placehold.co/400x600/C0C0C0/333?text=Page+3', // Replace with URL for page 3
-            'https://placehold.co/400x600/B0B0B0/333?text=Page+4', // Replace with URL for page 4
-            'https://placehold.co/400x600/A0A0A0/333?text=Page+5', // Replace with URL for page 5
-            'https://placehold.co/400x600/909090/333?text=Page+6', // Replace with URL for page 6
+            'pg-001.jpg', // Replace with URL for page 1
+            'pg-002.jpg', // Replace with URL for page 2
+            'pg-003.jpg', // Replace with URL for page 3
+            'pg-004.jpg', // Replace with URL for page 4
+            'pg-005.jpg', // Replace with URL for page 5
+            'pg-006.jpg', // Replace with URL for page 6
              // Add more image URLs for each page of your PDF
         ];
 
