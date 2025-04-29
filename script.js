@@ -12,12 +12,12 @@
         // IMPORTANT: Replace these with the URLs of your PDF page images
         // Ensure you have an image for each page of your PDF.
         const pageImages = [
-            'https://drive.google.com/file/d/1nny6JP5BvMmimG17Rx9cMWESBAvjh6DC/view?usp=sharing', // Replace with URL for page 1
-            'pg-002.jpg', // Replace with URL for page 2
-            'pg-003.jpg', // Replace with URL for page 3
-            'pg-004.jpg', // Replace with URL for page 4
-            'pg-005.jpg', // Replace with URL for page 5
-            'pg-006.jpg', // Replace with URL for page 6
+            'https://cimejia.github.io/profile.jpg', // Replace with URL for page 1
+            'https://cimejia.github.io/profile.jpg', // Replace with URL for page 2
+            'https://cimejia.github.io/profile.jpg', // Replace with URL for page 3
+            'https://cimejia.github.io/profile.jpg', // Replace with URL for page 4
+            'https://cimejia.github.io/profile.jpg', // Replace with URL for page 5
+            'https://cimejia.github.io/profile.jpg', // Replace with URL for page 6
              // Add more image URLs for each page of your PDF
         ];
 
