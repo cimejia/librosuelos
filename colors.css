@@ -1,0 +1,54 @@
+/* ----------------------------------------------------------- */
+/* ----------- BOTTOM BUTTONS MENU COLORS CONFIGS ------------ */
+/* ----------------------------------------------------------- */
+
+.PDFFlip_XUI-wrap, .PDFFlip_XUI-btn {
+	color: #b2bbbd; /* ICONS COLOR */ 
+	background-color: #3e474f; /* ICONS BACKGROUND COLOR */ 
+}
+
+.PDFFlip_XUI-btn:hover {
+	color: #5fcf80; /* ICONS ROLLOVER COLOR */
+}
+
+.PDFFlip_XUI-btn.PDFFlip-active {
+	color: #3e474f; /* ACTIVE ICONS COLOR */
+	background-color: #b2bbbd; /* ACTIVE ICONS BACKGROUND COLOR */
+}
+
+
+
+
+
+/* ----------------------------------------------------------- */
+/* ----------- RIGHT & LEFT ARROWS COLORS CONFIGS ------------ */
+/* ----------------------------------------------------------- */
+
+
+.PDFFlip-holder.PDFFlip-Geo > .PDFFlip_XUI-next, .PDFFlip-holder.PDFFlip-Geo > .PDFFlip_XUI-prev {
+	color: #b2bbbd;  /* ICON COLOR */
+ 	background-color: #3e474f;  /* BACKGROUND COLOR */
+}
+
+
+
+
+
+/* ----------------------------------------------------------- */
+/* ---------------- TABLE OF CONTENTS CONFIGS ---------------- */
+/* ----------------------------------------------------------- */
+
+
+.PDFFlip-TOC-container {
+	background-color:#3e474f;   /* BACKGROUND COLOR */
+}
+
+.PDFFlip-TOC-item a {
+	color: #b2bbbd; /* LINKS COLOR */
+	font-size:14px;  /* FONT SIZE */
+	border-bottom-color: #4e5861;   /* LINKS BOTTOM BORDER COLOR */ 
+}
+
+.PDFFlip-TOC-item a:hover {
+	background-color: #4e5861;  /* LINKS ROLLOVER BACKGROUND COLOR */
+}

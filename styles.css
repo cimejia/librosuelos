@@ -1,0 +1,1514 @@
+body {margin:0;}
+@font-face {
+    font-family: 'GothamRounded-Medium';
+    src: url('assets/fonts/GothamRounded-Medium.eot');
+    src: url('assets/fonts/GothamRounded-Medium.eot?#iefix') format('embedded-opentype'),
+         url('assets/fonts/GothamRounded-Medium.woff') format('woff'),
+         url('assets/fonts/GothamRounded-Medium.ttf') format('truetype'),
+         url('assets/fonts/GothamRounded-Medium.svg#GothamRounded-Medium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GothamRounded-Bold';
+    src: url('assets/fonts/GothamRounded-Bold.eot');
+    src: url('assets/fonts/GothamRounded-Bold.eot?#iefix') format('embedded-opentype'),
+         url('assets/fonts/GothamRounded-Bold.woff') format('woff'),
+         url('assets/fonts/GothamRounded-Bold.ttf') format('truetype'),
+         url('assets/fonts/GothamRounded-Bold.svg#GothamRounded-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.PDFFlip-abs-center {
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.PDFFlip-abs-h-center {
+	position: absolute;
+	left: 50%;
+	-webkit-transform: translate(-50%);
+	-moz-transform: translate(-50%);
+	-ms-transform: translate(-50%);
+	transform: translate(-50%);
+}
+
+.PDFFlip-holder {
+	min-height: 320px;
+	background: no-repeat 50%;
+	background-size: cover;
+	width: 100%;
+	position: relative;
+	/* background-color: #A6322D; */
+	/*Smoothing of images in Firefox*/
+	image-rendering: auto;
+}
+
+.PDFFlip-holder.PDFFlip-transparent:not(.PDFFlip-fullscreen) {
+	background: transparent !important;
+}
+
+.PDFFlip-holder.PDFFlip-custom-fullscreen.PDFFlip-fullscreen{
+	position: fixed !important;
+	top: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	bottom: 0 !important;
+	margin: 0 !important;
+	border: 0 !important;
+	z-index:999999;
+}
+
+.PDFFlip-holder .loading-info {
+	position: absolute;
+	top: 100%;
+	margin-top: 50px;
+	margin-left: 5px;
+	padding: 6px 20px;
+	background-color: rgba(0, 0, 0, 0.09);
+	border-radius: 5px;
+	font-size: 10px;
+	color: #fff;
+	max-width: 200px;
+	transform: translateX(-50%);
+	left: 50%;
+	opacity: 0.7;
+	transition: 0.3s top ease;
+	text-transform:uppercase;
+	font-family: 'GothamRounded-Bold';
+	text-align:center;
+}
+
+.loading-info.PDFFlip-old-browser {
+	color: gray;
+	background-color: white;
+	opacity: 0.9;
+	text-align: center;
+	max-height: none;
+}
+
+.loading-info.PDFFlip-old-browser a {
+	font-weight: bold;
+	font-style: normal;
+	text-transform: uppercase;
+	color: #2196F3;
+	display: block;
+	text-decoration: underline;
+	margin: 10px 0 0;
+}
+
+.PDFFlip-holder.PDFFlip-init .loading-info {
+	top: 50%;
+}
+
+.PDFFlip-3dcanvas {
+	position: absolute;
+	z-index: 1;
+	right: 0;
+}
+
+.PDFFlip-holder > canvas {
+}
+
+.PDFFlip-holder a {
+	outline: none;
+	text-decoration: none;
+	box-shadow: none;
+}
+
+.PDFFlip-holder.PDFFlip-zoom-enabled canvas.PDFFlip-3dcanvas,
+.PDFFlip-holder.PDFFlip-zoom-enabled .PDFFlip-book-stage {
+	cursor: move;
+	/*noinspection Annotator*/ cursor: -webkit-grab;
+}
+
+.PDFFlip-holder.PDFFlip-loading:before, .PDFFlip-holder.PDFFlip-loading:after {
+	content: " ";
+	position: absolute;
+	z-index: 100;
+	height: 85px;
+	width: 85px;
+	left: 50%;
+	top: 50%;
+	font-size: 12px;
+	margin: -45px -42px -25px;
+	box-sizing: border-box;
+	opacity: 1;
+}
+
+.PDFFlip-holder:before, .PDFFlip-holder:after {
+	content: " ";
+	transition: 0.3s 0.1s opacity;
+	opacity: 0;
+}
+
+.PDFFlip-holder.PDFFlip-loading:after {
+	content: " ";
+	background-image: url("images/loading.gif?");
+	background-repeat: no-repeat;
+	background-size: 55px;
+	background-position: 50%;
+}
+
+.PDFFlip-holder.PDFFlip-loading:before {
+	background-color: #ffffff;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 3px solid rgba(62, 71, 79, 0.1);
+}
+
+.PDFFlip-book-stage {
+	position: absolute;
+	overflow: hidden;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+	top: 0;
+	left: 0;
+
+	/*Blurry image fixation*/
+	filter: blur(0);
+	-webkit-filter: blur(0);
+
+	padding: 30px 50px 70px;
+}
+
+.PDFFlip-Geo .PDFFlip-book-stage {
+}
+
+.PDFFlip-holder.PDFFlip-xs .PDFFlip-book-stage {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.PDFFlip-holder.PDFFlip-sidemenu-open .PDFFlip-book-stage {
+	padding-left: 230px;
+	padding-right: 10px;
+}
+
+.PDFFlip-holder.PDFFlip-sidemenu-open > .PDFFlip_XUI-btn.PDFFlip_XUI-prev {
+	left: 220px;
+}
+
+.PDFFlip-book-stage.PDFFlip-zoom-enabled {
+	cursor: move;
+}
+
+.PDFFlip-page-front:before, .PDFFlip-page-back:before {
+	content: " ";
+}
+
+.PDFFlip-book-page .PDFFlip-page-front:before {
+	background-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.2) 10%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0) 70%);
+	background-image: -moz-linear-gradient(right, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.2) 10%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0) 70%);
+	background-image: -ms-linear-gradient(right, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.2) 10%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0) 70%);
+}
+
+.PDFFlip-book-page .PDFFlip-page-back:before {
+	background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.15) 15%, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.0));
+	background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.15) 15%, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.0));
+	background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.15) 15%, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.0));
+}
+
+.PDFFlip-book-wrapper, .PDFFlip-page-wrapper, .PDFFlip-book-page, .PDFFlip-single-inpage,
+.PDFFlip-page-front:before, .PDFFlip-page-wrapper:after, .PDFFlip-page-back:before,
+.PDFFlip-single-inpage:after, .PDFFlip-page-effects, .PDFFlip-page-effects:before, .PDFFlip-page-effects {
+	position: absolute;
+	height: 100%;
+	display: block;
+	top: 0;
+}
+
+.PDFFlip-single-inpage, .PDFFlip-book-page {
+	width: 100%;
+}
+
+.PDFFlip-book-wrapper {
+	position: relative;
+	margin: 0 auto;
+	transition: 0.3s left;
+	left: 0;
+	/* box-shadow: 0 2px 8px #aaa; */
+}
+
+.PDFFlip-loading.PDFFlip-holder .PDFFlip-book-wrapper {
+	left: 100%;
+}
+
+.PDFFlip-book-wrapper.close-right {
+	left: 25%;
+}
+
+.PDFFlip-book-wrapper.close-left {
+	left: -25%;
+}
+
+.PDFFlip-book-shadow {
+	position: absolute;
+	z-index: -1;
+	height: 100%;
+	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	-ms-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.PDFFlip-book-wrapper .PDFFlip-book-side-buttons {
+	position: absolute;
+	left: 100%;
+	width: 40px;
+	opacity: 0.3;
+	height: 100%;
+	cursor: pointer;
+	z-index: 30;
+	-webkit-border-radius: 0 20px 20px 0;
+	-moz-border-radius: 0 20px 20px 0;
+	border-radius: 0 20px 20px 0;
+}
+
+.PDFFlip-book-prev-button.PDFFlip-book-side-buttons {
+	-webkit-border-radius: 20px 0 0 20px;
+	-moz-border-radius: 20px 0 0 20px;
+	border-radius: 20px 0 0 20px;
+}
+
+.PDFFlip-book-wrapper .PDFFlip-book-side-buttons:hover {
+	opacity: 0.5;
+	background-color: rgba(0, 0, 0, 0.18);
+}
+
+.PDFFlip-book-wrapper .PDFFlip-book-prev-button {
+	right: 100%;
+	left: auto;
+	left: initial;
+}
+
+.PDFFlip-book-wrapper .PDFFlip-book-side-buttons:before {
+	position: absolute;
+	font-size: 30px;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 50%;
+}
+
+.PDFFlip-book-wrapper .PDFFlip-book-prev-button:before {
+}
+
+.PDFFlip-page-wrapper {
+	overflow: hidden;
+}
+
+.PDFFlip-hard-page .PDFFlip-page-wrapper {
+	width: 100% !important;
+	height: 100% !important;
+	overflow: visible;
+	transform-style: preserve-3d;
+	-webkit-transform-origin: 0 50% 0;
+	-moz-transform-origin: 0 50% 0;
+	-ms-transform-origin: 0 50% 0;
+	transform-origin: 0 50% 0;
+}
+
+.PDFFlip-book-page.PDFFlip-flipping, .PDFFlip-book-page.PDFFlip-folding {
+	box-shadow: -2px 0 10px rgba(0, 0, 0, 0.0);
+}
+
+.PDFFlip-book-page.PDFFlip-left-side {
+	left: 0;
+	-webkit-transform-origin: right;
+	-moz-transform-origin: right;
+	-ms-transform-origin: right;
+	transform-origin: right;
+}
+
+.PDFFlip-book-page.PDFFlip-right-side {
+	left: 50%;
+	-webkit-transform-origin: left;
+	-moz-transform-origin: left;
+	-ms-transform-origin: left;
+	transform-origin: left;
+}
+
+.PDFFlip-book-page.PDFFlip-hard-page {
+}
+
+.PDFFlip-book-page.PDFFlip-right-side + .PDFFlip-page-wrapper.PDFFlip-right-side {
+	z-index: -1;
+}
+
+.PDFFlip-book-page .PDFFlip-page-front, .PDFFlip-book-page .PDFFlip-page-back {
+	width: 100%;
+	background-size: 100.5% 100%;
+	background-size: 100% 100%;
+	height: 100%;
+	background-color: white;
+	position: absolute;
+	box-sizing: border-box;
+}
+
+.PDFFlip-page-back > canvas, .PDFFlip-page-front > canvas {
+	width: 100%;
+	position: relative;
+	z-index: -1;
+}
+
+/*right left shadow during flip*/
+.PDFFlip-page-wrapper:before {
+}
+
+.PDFFlip-quick-turn:before {
+	opacity: 0;
+}
+
+.PDFFlip-book-page.PDFFlip-flipping.PDFFlip-left-side:before {
+	background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
+	background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
+	width: 10px;
+	left: -10px;
+}
+
+.PDFFlip-book-page.PDFFlip-right-side:before {
+}
+
+.PDFFlip-book-page {
+	width: 50%;
+}
+
+.PDFFlip-book-page.PDFFlip-flipping, .PDFFlip-book-page.PDFFlip-folding {
+	z-index: 200 !important;
+}
+
+.PDFFlip-single-inpage {
+	background-size: 100.25% !important;
+	background-repeat: no-repeat !important;
+	transition-property: transform;
+	width: 100%;
+	overflow: hidden;
+	/*this causes page cuts in IE*/
+}
+
+.PDFFlip-book-page.PDFFlip-left-side .PDFFlip-page-front {
+	/*overflow: hidden;*/
+	z-index: 2;
+}
+
+.PDFFlip-book-page.PDFFlip-left-side .PDFFlip-page-back {
+	z-index: 1;
+}
+
+.PDFFlip-book-page.PDFFlip-left-side.PDFFlip-folding:not(.PDFFlip-hard-page) .PDFFlip-page-back {
+	z-index: 3;
+}
+
+.PDFFlip-book-page.PDFFlip-right-side .PDFFlip-page-front {
+	top: 0;
+	left: 0;
+	z-index: 0;
+}
+
+.PDFFlip-book-page, .PDFFlip-page-front, .PDFFlip-page-back,
+.PDFFlip-page-fold-inner-shadow, .PDFFlip-page-fold-outer-shadow, .PDFFlip-page-wrapper {
+	position: absolute;
+	-webkit-transform-origin: 0 0 0;
+	-moz-transform-origin: 0 0 0;
+	-ms-transform-origin: 0 0 0;
+	transform-origin: 0 0 0;
+}
+
+.PDFFlip-page-front, .PDFFlip-page-back {
+	overflow: visible;
+}
+
+.PDFFlip-page-fold-outer-shadow {
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+}
+
+.PDFFlip-page-fold-inner-shadow {
+	position: absolute;
+	z-index: 5;
+	display: none;
+}
+
+.PDFFlip-book-page.PDFFlip-folding .PDFFlip-page-fold-inner-shadow {
+	display: block;
+}
+
+.PDFFlip-book-page.PDFFlip-right-side .PDFFlip-page-back {
+	left: 0;
+	z-index: 1;
+}
+
+.PDFFlip-book-page.PDFFlip-right-side.PDFFlip-folding .PDFFlip-page-front {
+	z-index: 2;
+}
+
+.PDFFlip-page-wrapper.PDFFlip-right-side .PDFFlip-page-back {
+	left: 100%;
+	z-index: 1;
+	overflow: hidden;
+}
+
+.PDFFlip-hard-page .PDFFlip-page-front,
+.PDFFlip-hard-page .PDFFlip-page-back {
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.PDFFlip-hard-page.PDFFlip-right-side .PDFFlip-page-front {
+	-webkit-transform-origin: right 50%;
+	-moz-transform-origin: right 50%;
+	-ms-transform-origin: right 50%;
+	transform-origin: right 50%;
+	z-index: 3 !important;
+	/*transform-style: preserve-3d;*/ /*this causes issues in FF*/
+}
+
+.PDFFlip-hard-page.PDFFlip-left-side .PDFFlip-page-front {
+	-webkit-transform-origin: right 50%;
+	-moz-transform-origin: right 50%;
+	-ms-transform-origin: right 50%;
+	transform-origin: right 50%;
+}
+
+.PDFFlip-hard-page.PDFFlip-right-side .PDFFlip-page-back {
+	-webkit-transform-origin: left 50%;
+	-moz-transform-origin: left 50%;
+	-ms-transform-origin: left 50%;
+	transform-origin: left 50%;
+	z-index: 3;
+	/*transform-style: preserve-3d;*/ /*this causes issues in FF*/
+}
+
+.PDFFlip-hard-page.PDFFlip-left-side .PDFFlip-page-back {
+	-webkit-transform-origin: left 50%;
+	-moz-transform-origin: left 50%;
+	-ms-transform-origin: left 50%;
+	transform-origin: left 50%;
+}
+
+/*Mid shadows*/
+.PDFFlip-page-front:before, .PDFFlip-page-back:before {
+	width: 20%;
+	z-index: 5;
+}
+
+.PDFFlip-page-front:before {
+	right: 0;
+}
+
+.PDFFlip-page-wrapper.PDFFlip-right-side.PDFFlip-flipping {
+	z-index: 4;
+}
+
+/*Book UI*/
+
+.PDFFlip_XUI {
+	height: 60px;
+	padding: 20px 16px 0;
+}
+
+.PDFFlip_XUI-wrap, .PDFFlip_XUI-btn {
+	color: #b2bbbd;
+	vertical-align: top;
+	background-color: #3e474f;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+
+.PDFFlip_XUI-wrap {
+	background-color: #3e474f;
+	position: absolute;
+}
+
+.PDFFlip-share-wrapper {
+	z-index: 2;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.35);
+	display: none;
+}
+
+.PDFFlip-share-wrapper.PDFFlip-hidden { }
+
+.PDFFlip-share-box {
+	position: absolute;
+	top: 50%;
+	width: 280px;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	left: 50%;
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 10px 15px 5px;
+	text-align: center;
+}
+
+span.PDFFlip-share-title {
+	color: #777;
+	margin-bottom: 10px;
+	display: block;
+}
+
+.PDFFlip-share-url {
+	/* border: 0; */
+	background-color: #fff;
+	height: 60px;
+	color: #666;
+	padding: 2px 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 100%;
+	font-size: 12px;
+	box-sizing: border-box;
+	margin-bottom: 0px;
+}
+
+.PDFFlip-share-button {
+	display: inline-block;
+	text-align: center;
+	cursor: pointer;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	padding: 10px;
+	margin: 3px;
+	color: #aaa;
+}
+
+
+.PDFFlip-share-button:hover {
+	color: #444;
+}
+
+.PDFFlip_XUI-btn {
+	position: relative;
+	width: 40px;
+	right: 0;
+	height: 40px;
+	font-size: 20px !important;
+	cursor: pointer;
+	z-index: 2;
+	display: inline-block;
+	padding: 10px 8px;
+	line-height: 1;
+}
+
+
+
+.PDFFlip_XUI-download {
+	font-weight:600 !important;
+}
+
+.PDFFlip-Geo .PDFFlip_XUI-controls > .PDFFlip_XUI-btn:first-child {
+	/*border-radius: 5px 0 0 5px;*/
+}
+
+.PDFFlip-Geo .PDFFlip_XUI-controls > .PDFFlip_XUI-btn:last-child {
+	/*border-radius: 0 5px 5px 0;*/
+}
+
+.PDFFlip_XUI-btn:before {
+	box-sizing: border-box;
+}
+
+.PDFFlip_XUI-fit, .PDFFlip_XUI-thumbnail {
+}
+
+.PDFFlip_XUI-thumbnail, .PDFFlip_XUI-share, .PDFFlip_XUI-outline, .PDFFlip_XUI-help, .PDFFlip_XUI-sound {
+	float: left;
+}
+
+.PDFFlip_XUI-zoomin, .PDFFlip_XUI-zoomout {
+}
+
+.PDFFlip_XUI-btn:hover {
+	color: #5fcf80;
+}
+
+.PDFFlip_XUI-btn.disabled, .PDFFlip_XUI-btn.disabled:hover {
+	opacity:0.2;
+}
+
+.PDFFlip_XUI-share:before {
+}
+
+.PDFFlip_XUI-page {
+	padding: 8px 5px 2px;
+	font-size: 12px;
+	width: auto;
+	width: 50px;
+	margin: 0 0;
+	/* border-right: 1px solid #ddd; */
+	border-radius: 0;
+	/* float: left !important; */
+	font-family: 'GothamRounded-Bold';
+}
+
+.PDFFlip_XUI-page input {
+	width: 100%;
+	background-color: transparent;
+	height: 25px;
+	margin: 0;
+	border: 1px solid #b2bbbd;
+	border-radius:5px;
+	text-align: center;
+	vertical-align: top;
+	color: transparent;
+	font-size: 13px;
+	top: 0;
+	box-sizing: border-box;
+	z-index: -1;
+	display: inline-block;
+	opacity: 0;
+	font-family: 'GothamRounded-Medium';
+}
+
+.PDFFlip_XUI-page input:focus {
+	z-index: 2;
+	opacity: 1;
+	color: inherit;
+}
+
+.PDFFlip_XUI-page input:focus + label {
+	opacity: 0;
+	display: none;
+}
+
+.PDFFlip_XUI-page label {
+	position: absolute;
+	height: 30px;
+	width: 100%;
+	display: block;
+	top: 0;
+	padding-top: 14px;
+	color: #999;
+	font-size: 13px;
+	left: 0;
+	cursor: pointer;
+	background-color: transparent;
+	z-index: 1;
+	box-sizing: border-box;
+	font-family: 'GothamRounded-Medium';
+}
+
+.PDFFlip_XUI-share {
+	float: left;
+}
+
+.PDFFlip_XUI-share:before {
+}
+
+.PDFFlip_XUI-fullscreen {
+	bottom: 0;
+}
+
+.PDFFlip_XUI-fullscreen:before {
+}
+
+.PDFFlip_XUI-zoom {
+	top: 24px;
+	height: 60px;
+	right: 24px;
+	width: 30px;
+	display: none;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.PDFFlip_XUI-controls {
+	bottom: 0;
+	width: 100%;
+	/* border-radius: 5px; */
+	height: 40px;
+	/* -webkit-transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	transform: translateX(-50%);
+	left: 50%; */
+	padding: 0;
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Chrome/Safari/Opera */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE/Edge */
+	user-select: none;
+	/* non-prefixed version, currently
+						   not supported by any browser */
+	z-index: 4;
+	/* bottom: 15px; */
+	display: block;
+}
+
+.PDFFlip-Geo .PDFFlip_XUI-controls {
+	bottom: 0px;
+	width: auto;
+	width: intial;  /*IE fallback*/
+	-webkit-transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	transform: translateX(-50%);
+	left: 50%;
+	margin: 0 auto;
+	display: table; /*IE fallback*/
+	display: flex;
+}
+
+.PDFFlip_XUI-wrap.PDFFlip_XUI-controls .PDFFlip_XUI-btn {
+	/* display: table-cell; */
+	float: none;
+}
+
+.PDFFlip_XUI-size {
+	bottom: 24px;
+	height: 60px;
+	right: 24px;
+}
+
+.PDFFlip_XUI-zoom:before, .PDFFlip_XUI-size:before {
+	height: 0;
+	border-bottom: 1px solid;
+	content: " ";
+	right: 5px;
+	opacity: 0.3;
+	display: block;
+	position: absolute;
+	top: 30px;
+	left: 5px;
+	z-index: 2;
+}
+
+.PDFFlip_XUI-zoomin {
+	top: 0;
+}
+
+.PDFFlip_XUI-zoomin:before {
+}
+
+.PDFFlip_XUI-zoomout {
+	bottom: 0;
+}
+
+.PDFFlip_XUI-btn.PDFFlip_XUI-zoomout {
+	/* display: none; */
+}
+
+.PDFFlip-zoom-enabled .PDFFlip_XUI-btn.PDFFlip_XUI-zoomout {
+	/* display: block; */
+}
+
+.PDFFlip-zoom-enabled .PDFFlip_XUI-btn.PDFFlip_XUI-zoomin {
+	/* display: none; */
+}
+
+.PDFFlip_XUI-zoomout:before {
+}
+
+.PDFFlip_XUI-next {
+	right: 24px;
+	right: 0;
+	border-radius: 0;
+}
+
+
+.PDFFlip-holder.PDFFlip-Geo > .PDFFlip_XUI-next, .PDFFlip-holder.PDFFlip-Geo > .PDFFlip_XUI-prev {
+	border-radius: 0px;
+	width: 40px;
+	color: #b2bbbd;
+	background-color: #3e474f;
+	padding:10px 0;
+	margin:0;
+	font-size:30px !important;
+}
+
+.PDFFlip-holder.PDFFlip-Geo > .PDFFlip_XUI-next {
+	border-top-left-radius: 50px;
+	border-bottom-left-radius: 50px;
+	padding-left:10px;
+}
+
+.PDFFlip-holder.PDFFlip-Geo > .PDFFlip_XUI-prev {
+	left:0px;
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+	padding-right:10px;
+}
+
+
+.PDFFlip-holder > .PDFFlip_XUI-next, .PDFFlip-holder > .PDFFlip_XUI-prev {
+	margin-top: -5px;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	top: 50%;
+	position: absolute;
+	/* box-shadow: 0 0 5px rgba(0, 0, 0, 0.35); */
+	opacity: 0.8;
+	background-color: transparent;
+	height: auto;
+	height: initial;
+	font-size: 36px;
+	color: #ffffff;
+	width: auto;
+	text-align: center;
+	width: initial;
+}
+
+.PDFFlip-holder > .PDFFlip_XUI-next:hover, .PDFFlip-holder > .PDFFlip_XUI-prev:hover {
+	opacity: 1;
+}
+
+
+
+.PDFFlip_XUI-next:before {
+}
+
+.PDFFlip_XUI-prev {
+	left: 0;
+	right: auto;
+	border-radius: 0;
+}
+
+.PDFFlip_XUI-prev:before {
+}
+
+.PDFFlip_XUI-alt {
+	position: relative !important;
+	right: auto;
+	right: initial;
+	left: auto;
+	left: initial;
+	box-shadow: none !important;
+	background-color: transparent;
+	border-radius: 0;
+}
+
+.PDFFlip_XUI-alt.PDFFlip_XUI-next,
+.PDFFlip_XUI-alt.PDFFlip_XUI-prev {
+	/* display: none !important; */
+}
+
+.PDFFlip_XUI-alt.PDFFlip_XUI-next {
+	/*border-right: 1px solid #ddd;*/
+}
+
+.PDFFlip_XUI-start {
+}
+
+.PDFFlip_XUI-start:before {
+}
+
+.PDFFlip_XUI-end {
+	/*border-right: 1px solid #ddd;*/
+
+}
+
+.PDFFlip_XUI-end:before {
+}
+
+.PDFFlip_XUI-thumbnail:before {
+}
+
+.PDFFlip_XUI-outline:before {
+}
+
+.PDFFlip_XUI-btn.PDFFlip-active {
+	color: #3e474f;
+	background-color: #b2bbbd;
+}
+
+.PDFFlip_XUI-fit {
+	display: none;
+}
+
+.PDFFlip_XUI-zoomin, .PDFFlip_XUI-zoomout, .PDFFlip_XUI-fullscreen, .PDFFlip_XUI-more {
+	float: right;
+}
+
+.PDFFlip_XUI-fit {
+	top: 0;
+}
+
+.PDFFlip_XUI-fit:before {
+}
+
+.PDFFlip_XUI-fit.button-fit-active:before {
+}
+
+.PDFFlip-single-inpage div {
+}
+
+.PDFFlip_XUI-more .more-container {
+	display: none;
+	position: absolute;
+	bottom: 100%;
+	margin-bottom: 8px !important;
+	right: 10px;
+	background-color: #f7f7f7;
+	z-index: 20;
+	border-radius: 5px;
+	/* overflow: hidden; */
+	box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.more-container:before { content: " "; position: absolute; border: solid transparent; border-width: 7px; border-top-color: #eee; height: 0; width: 0; bottom: -14px; /* background-color: white; */ right: 13px; margin-right: -8px; pointer-events: none; }
+
+.more-container .PDFFlip_XUI-btn {
+	width: auto;
+	width: initial;
+	width: 170px;
+	text-align: left;
+	padding: 8px 10px;
+	height: 36px;
+	border-top: 1px solid #e4e4e4;
+	border-radius: 0;
+}
+
+.more-container .PDFFlip_XUI-btn:hover {
+	background-color: #eee;
+}
+
+.more-container > .PDFFlip_XUI-btn:first-child {
+	border-radius: 5px;
+	border-top: none;
+}
+
+.more-container > .PDFFlip_XUI-btn:last-child {
+	border-radius: 0 0 5px 5px;
+}
+
+.more-container .PDFFlip_XUI-btn:before {
+	position: absolute;
+	top: 11px;
+	font-size: 14px;
+}
+
+.PDFFlip_XUI-btn span {
+	display: none;
+}
+
+.more-container .PDFFlip_XUI-btn span {
+	font-size: 12px;
+	padding-left: 20px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.PDFFlip_XUI-more.PDFFlip-active .more-container {
+	display: block;
+}
+
+.customLinkAnnotation, .linkAnnotation {
+	position: absolute;
+	z-index: 5;
+	cursor: pointer;
+	pointer-events: all;
+	border: none !important;
+}
+
+section.linkAnnotation a {
+	display: block;
+	height: 100%;
+}
+
+section.linkAnnotation a, a.linkAnnotation, a.customLinkAnnotation {
+	background-color: transparent;
+	background-color: rgb(255, 255, 0);
+	/* border-bottom: 1px solid #2196F3; */
+	opacity: 0.1;
+}
+a.customLinkAnnotation{
+	/* opacity: 0.15; */
+}
+
+section.linkAnnotation a:hover,
+a.linkAnnotation:hover,
+a.customLinkAnnotation:hover {
+	opacity: 0.4;
+	border-color: transparent;
+	background-color: #2196F3;
+}
+
+.annotationDiv {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	overflow: hidden;
+}
+
+section.linkAnnotation a .annotationLayer >
+a {
+	display: block;
+	position: absolute;
+	height: 100%;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+
+section.linkAnnotation a.internalLink:hover {
+}
+
+.PDFFlip-page-loading:before {
+	background-image: url("../images/loading.gif");
+	background-repeat: no-repeat;
+	background-size: 22px;
+	content: "";
+	height: 22px;
+	width: 22px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -11px -11px;
+}
+
+.PDFFlip-thumb-container .PDFFlip-vrow {
+	height: 124px;
+	left: 0;
+	width: 90%;
+	margin: 10px auto;
+	background-position: 50%;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	right: 0;
+	border-radius: 5px;
+	/* opacity: 0.7; */
+}
+
+.PDFFlip-thumb-container .PDFFlip-vrow:before {
+	content: "";
+	background-image: url("../images/loading.gif");
+	background-color: rgba(255,255,255,1.00);
+	background-position:center center;
+	background-repeat: no-repeat;
+	background-size: 22px;
+	height: 32px;
+	width: 32px;
+	display: block;
+	top: 60px;
+	margin: 0 auto;
+	position: relative;
+	z-index: 0;
+	border-radius:5px;
+}
+
+.PDFFlip-thumb-container .PDFFlip-vrow:hover {
+	background-color: #bbb;
+}
+
+.PDFFlip-Geo .PDFFlip-thumb-container .PDFFlip-vrow:hover {
+	background-color: #ccc;
+	opacity: 1;
+}
+
+.PDFFlip-thumb-container .PDFFlip-vrow.PDFFlip-thumb-loaded {
+	background-size: contain;
+	/* opacity: 1; */
+}
+
+.PDFFlip-thumb-container .PDFFlip-vrow.PDFFlip-thumb-loaded:before {
+	display: none;
+}
+
+.PDFFlip-vrow > div {
+	/* padding: 25%; */
+	height: 20px;
+	background-color: rgba(170, 170, 170, 0.54);
+	width: 40px;
+	margin: 0 auto;
+}
+
+.PDFFlip-thumb-container {
+	/* left: -100%; */
+	float: left;
+	/* padding: 20px 0 !important; */
+	width: 220px;
+	height: auto !important;
+	position: absolute !important;
+	top: 0;
+	z-index: 3;
+	bottom: 40px;
+	background-color: rgba(238, 238, 238, 0.9);
+	/* font-size: 30px; */
+	box-shadow: 1px 0 4px rgba(102, 102, 102, 0.38);
+	text-align: center;
+}
+
+
+.PDFFlip-thumb-container::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+.PDFFlip-thumb-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+ 
+.PDFFlip-thumb-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+
+.PDFFlip-TOC-container {
+	float: left;
+	width: 200px;
+	text-align: left;
+	height: auto !important;
+	position: absolute !important;
+	top: 0;
+	padding: 20px 10px 5px;
+	bottom: 40px;
+	z-index: 3;
+	color: #666;
+	overflow: auto;
+	font-size: 12px;
+	background-color:#3e474f;
+	box-sizing: content-box;
+}
+
+.PDFFlip-TOC-container, .PDFFlip-thumb-container {
+	transition: 0.5s transform ease;
+	transform: translateX(-100%);
+	left: -10px;
+}
+
+.PDFFlip-Geo .PDFFlip-TOC-container, .PDFFlip-Geo .PDFFlip-thumb-container {
+	bottom: 0;
+}
+
+.PDFFlip-TOC-container.PDFFlip-TOC-visible {
+	display: block;
+}
+
+.PDFFlip-Geo .PDFFlip-TOC-container.PDFFlip-TOC-visible, .PDFFlip-Geo .PDFFlip-thumb-container.PDFFlip-thumb-visible {
+}
+
+.PDFFlip-TOC-container.PDFFlip-TOC-visible, .PDFFlip-thumb-container.PDFFlip-thumb-visible {
+	transform: translateX(0);
+	left: 0;
+}
+
+.PDFFlip-Geo .PDFFlip-thumb-container.PDFFlip-thumb-visible {
+	/* background-color: transparent; */
+}
+
+.PDFFlip-TOC_activate {
+	cursor: pointer;
+	float: left;
+	width: 18px;
+	padding: 5px 0;
+	margin-left: -18px;
+	text-align: center;
+}
+
+.PDFFlip-TOC_activate.PDFFlip-TOCs-hidden ~ .PDFFlip-TOC-items {
+	display: none;
+}
+
+.PDFFlip-TOC-items > .PDFFlip-TOC-item {
+	margin-left: 18px;
+	/* padding: 5px 0; */
+}
+
+.PDFFlip-TOC-item a:hover, .PDFFlip-TOC_activate:hover {
+	background-color: #4e5861;
+}
+
+.PDFFlip-TOC-item a {
+	color: #b2bbbd;
+	text-decoration: none !important;
+	display: block;
+	padding: 8px 0 10px 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	/* white-space: nowrap; */
+	box-shadow: none !important;
+	font-family: 'GothamRounded-Medium';
+	font-size:14px;
+	border-bottom-color: #4e5861;
+	border-bottom-style: solid;
+	border-bottom-width:1px;
+}
+
+.PDFFlip-TOC_activate:before {
+	content: "\f078";
+	font-size: 10px;
+	font-family: FontAwesome;
+}
+
+.PDFFlip-TOC_activate.PDFFlip-TOCs-hidden:before {
+	content: "\f054";
+}
+
+.PDFFlip-lightbox-wrapper {
+	position: fixed !important;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	height: auto !important;
+	left: 0;
+	background-color: white;
+	z-index: 99999;
+}
+
+.PDFFlip-lightbox-controls {
+	float: right;
+	padding: 5px;
+	z-index: 1000;
+	position: relative;
+}
+
+.PDFFlip-lightbox-close {
+	float: right;
+	height: 40px;
+	text-align: center;
+	cursor: pointer;
+	color: #3e474f !important;
+	width: 40px;
+	background-color: transparent !important;
+	transition: 0.2s;
+	opacity:1;
+}
+
+.PDFFlip-lightbox-close:hover {
+	opacity: 0.7 !important;
+}
+
+.PDFFlip-lightbox-close:before {
+	top: 50%;
+	position: absolute;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	left: 50%;
+	font-size: 44px;
+}
+
+.PDFFlip-lightbox-wrapper .PDFFlip-holder {
+	position: absolute !important;
+	width: 100%;
+	top: 0;
+	bottom: 0;
+	height: auto !important;
+}
+
+
+
+.PDFFlip-holder.PDFFlip-xs .PDFFlip_XUI-controls .PDFFlip_XUI-btn.PDFFlip_XUI-page {
+	display: none !important;
+}
+
+.PFlip_button, .PFlip_thb {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+}
+
+.PFlip_button {
+	padding: 5px 15px;
+	background-color: #444;
+	background: #0085ba;
+	color: white;
+	font-size: 14px;
+	border-color: #0073aa #006799 #006799;
+	cursor: pointer;
+	border-width: 1px;
+	border-style: solid;
+	-webkit-appearance: none;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	white-space: nowrap;
+}
+
+.PFlip_thb { border: none; width: 140px; height: 200px; text-align: center; }
+
+.PFlip_thb {
+	cursor: pointer;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.22);
+	display: inline-block;
+	transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+	box-sizing: border-box;
+	-webkit-transition: 0.2s;
+	perspective: 1200px;
+	-moz-perspective: 1200px;
+	margin: 30px 10px 10px;
+	-webkit-perspective: 800px;
+}
+
+.PFlip_editions .PFlip_thb, .PFlip_editions .PDFFlip-dummy {
+	width: 140px;
+	height: 200px;
+	text-align: center;
+	display: inline-block;
+	position: relative;
+	margin: 20px 10px;
+	/* clear: left; */
+	vertical-align: top;
+}
+
+.PFlip_editions .PDFFlip-dummy {
+}
+
+.PFlip_book-cover {
+	background-size: 100% 100%;
+	height: 100%;
+	width: 100%;
+	transform-origin: left;
+	top: 0;
+	background-color: #eee;
+	position: absolute;
+	overflow: hidden;
+	-webkit-transition: 0.3s;
+	-moz-transition: 0.3s;
+	-ms-transition: 0.3s;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.22);
+}
+
+.PFlip_thb .PFlip_book-title {
+	bottom: -100%;
+	position: absolute;
+	width: 100%;
+	left: 0;
+	padding: 5px;
+	font-size: 12px;
+	background: rgba(1, 163, 163, 0.87);
+	background: rgba(146, 75, 117, 0.9);
+	box-sizing: border-box;
+	display: block;
+	color: white;
+	-webkit-transition: 0.4s;
+	opacity: 0;
+}
+
+.PFlip_thb .PFlip_book-tag {
+	float: left;
+	padding: 0 4px 20px;
+	background-color: rgba(0, 0, 0, 0.26);
+	text-transform: uppercase;
+	font-size: 10px;
+	margin: -15px 0 0 2px;
+	z-index: -1;
+	color: rgba(255, 255, 255, 0.8);
+	position: relative;
+}
+
+.PFlip_thb:hover .PFlip_book-title,
+.PFlip_thb-not-found .PFlip_book-title {
+	opacity: 1;
+	bottom: 0;
+}
+
+
+.PFlip_thb:hover .PFlip_book-cover {
+	-webkit-transform: rotateY(-20deg);
+	-moz-transform: rotateY(-20deg);
+	-ms-transform: rotateY(-20deg);
+	transform: rotateY(-20deg);
+	box-shadow: 3px 0 12px rgba(0, 0, 0, 0.60);
+}
+
+.PFlip_editions {
+	max-width: 960px;
+	margin: 0 auto;
+	text-align: center;
+	position: relative;
+	z-index: 1;
+	padding: 20px 5px 150px;
+}
+
+.PFlip_editions-break {
+	color: rgba(255, 255, 255, 0.3);
+	font-size: 14px;
+	letter-spacing: 1px;
+	font-weight: 600;
+	margin-top: 25px;
+	text-transform: uppercase;
+}
+
+.PFlip_editions-break:after {
+	content: " ";
+	bottom: 0;
+	width: 50px;
+	height: 1px;
+	background-color: rgba(255, 255, 255, 0.24);
+	display: block;
+	margin: 10px auto;
+}
+
+.PDFFlip-page-wrapper {
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+}
+
+.PDFFlip-holder ::-webkit-scrollbar {
+	width: 8px;
+}
+
+.PDFFlip-holder ::-webkit-scrollbar-button {
+	height: 8px;
+}
+
+.PDFFlip-holder ::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.3);
+	border: 0 none #ffffff;
+	border-radius: 100px;
+}
+
+.PDFFlip-holder ::-webkit-scrollbar-thumb:hover {
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.PDFFlip-holder ::-webkit-scrollbar-thumb:active {
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.PDFFlip-holder ::-webkit-scrollbar-track {
+	background: rgba(0, 0, 0, 0.20);
+	border: 0 none #ffffff;
+	border-radius: 100px;
+}
+
+.PDFFlip-holder ::-webkit-scrollbar-track:hover {
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.PDFFlip-holder ::-webkit-scrollbar-track:active {
+	background: rgba(0, 0, 0, 0.15);
+}
+
+.PDFFlip-holder ::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
